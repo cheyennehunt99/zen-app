@@ -1,17 +1,20 @@
 const db = require("../models");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
   //GET ALL Likes items for a user
-  app.get("/api/likes", (req, res) => {
+  app.get("/likes", isAuthenticated, (req, res) => {
     db.Likes.findAll({
       where: {
-        userId: req.body.userId,
-        hidden: req.body.hidden
+        userId: req.user.id
       },
-      include: Quote
+      include: db.Quote
     })
       .then(data => {
-        res.status(200).json(data);
+        //Set data to key for passing to handlebars
+        const hbsObject = { likes: data };
+        //Render data in handlebars
+        res.status(200).render("likes", hbsObject);
       })
       .catch(err => {
         res.status(500).json(err);
@@ -19,7 +22,7 @@ module.exports = function(app) {
   });
 
   //GET one Likes item for a user, by id
-  app.get("/api/likes/:id", (req, res) => {
+  app.get("/api/like/:id", (req, res) => {
     db.Likes.findOne({
       where: {
         id: req.params.id,

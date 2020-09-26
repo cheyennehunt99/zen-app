@@ -20,13 +20,14 @@ module.exports = function(app) {
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/main", isAuthenticated, (req, res) => {
     db.Quote.findOne({
-      attributes: ["quote_body", "quote_author", "image_url"],
+      attributes: ["quote_body", "quote_author", "image_url", "id"],
       order: [["id", "DESC"]]
     }).then(data => {
       res.render("index", {
         quote: data.dataValues.quote_body,
         author: data.dataValues.quote_author,
-        url: data.dataValues.image_url
+        url: data.dataValues.image_url,
+        id: data.dataValues.id
       });
     });
   });

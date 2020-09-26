@@ -1,3 +1,10 @@
+.background {
+  box-sizing: border-box;
+  background-image: url(https://images.unsplash.com/photo-1601074679090-b68850d7fb6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
 .navbar {
   background: #444;
   transition: all .6s;
