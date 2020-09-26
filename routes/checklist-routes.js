@@ -40,7 +40,7 @@ module.exports = function(app) {
   //POST checklist item
   app.post("/api/list", (req, res) => {
     db.Checklist.create({
-      body: req.body.value,
+      body: req.body.description,
       user_id: req.user.id
     })
       .then(data => {
@@ -52,7 +52,7 @@ module.exports = function(app) {
   });
 
   //UPDATE checklist item as complete
-  app.put("/api/list/:id", (req, res) => {
+  app.put("/api/list/complete/:id", (req, res) => {
     const id = req.params.id;
     db.Checklist.update(
       {
@@ -73,7 +73,7 @@ module.exports = function(app) {
   });
 
   //UPDATE checklist item as hidden
-  app.put("/api/list/:id", (req, res) => {
+  app.put("/api/list/hide/:id", (req, res) => {
     const id = req.params.id;
     db.Checklist.update(
       {
