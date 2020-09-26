@@ -14,6 +14,13 @@ module.exports = function(sequelize, DataTypes) {
         model: "Users",
         key: "id"
       }
+    },
+    quoteId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "Quotes",
+        key: "id"
+      }
     }
   });
   return Likes;
